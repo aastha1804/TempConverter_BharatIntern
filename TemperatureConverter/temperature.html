@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Temperature</title>
+    <link rel="stylesheet" type="text/css" href="Converter.css">
+    <style>
+		body{
+    		background: repeating-linear-gradient(90deg,rgb(51, 87, 101),rgba(228, 107, 169, 0.416));
+    		height: 100vh;
+    		width: 100%;
+		}
+	</style>
+</head>
+<body>
+    <a href="bottom.html"><img src="home1.png" id="home"><br>Home</a>
+      <div class="container">
+      <h2>Temperature Converter</h2>
+      <div id="box">
+        <form>
+            <div id="input">
+                <div class="From">
+                    <pre>From :</pre>
+                </div>
+                <div class="dropDown">
+                    <select id="fromUnit">
+                        <option value="celsius">Celsius</option>
+						<option value="fahrenheit">Fahrenheit</option>
+						<option value="kelvin">Kelvin</option>
+                    </select>
+                </div>
+                <div class="write">
+                    <input type="number" id="inputValue" placeholder="enter the number you want to convert">
+                </div>
+            </div>
+            <div id="output">
+                <div class="From">
+                    <pre>To :     </pre>
+                </div>
+                <div class="dropDown">
+                    <select id="toUnit">
+                        <option value="celsius">Celsius</option>
+						<option value="fahrenheit">Fahrenheit</option>
+						<option value="kelvin">Kelvin</option>
+                    </select>
+                </div>
+                <div class="write">
+                    <input type="text" id="result" class="answer" placeholder="result">
+                </div>
+            </div>
+            <div>
+                <button class="button" onclick="convert(event)">Convert</button>
+            </div>            
+          </form>
+      </div>
+
+    <script type="text/javascript">
+        function convert(event) {
+
+            event.preventDefault();
+
+            const inputValue = parseFloat(document.getElementById('inputValue').value);
+			const fromUnit = document.getElementById('fromUnit').value;
+			const toUnit = document.getElementById('toUnit').value;
+			let result;
+
+			if (fromUnit === toUnit) {
+				result = inputValue;
+			} else if (fromUnit === 'celsius' && toUnit === 'fahrenheit') {
+				result = (inputValue * 9/5) + 32;
+			} else if (fromUnit === 'celsius' && toUnit === 'kelvin') {
+				result = inputValue + 273.15;
+			} else if (fromUnit === 'fahrenheit' && toUnit === 'celsius') {
+				result = (inputValue - 32) * 5/9;
+			} else if (fromUnit === 'fahrenheit' && toUnit === 'kelvin') {
+				result = (inputValue - 32) * 5/9 + 273.15;
+			} else if (fromUnit === 'kelvin' && toUnit === 'celsius') {
+				result = inputValue - 273.15;
+			} else if (fromUnit === 'kelvin' && toUnit === 'fahrenheit') {
+				result = (inputValue - 273.15) * 9/5 + 32;
+			}
+            console.log(result);
+
+            var output=document.getElementById('result');
+            output.value = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>
